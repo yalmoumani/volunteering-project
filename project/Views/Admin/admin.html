@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Event Search</title>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+      <link rel="stylesheet" href="admin.css">
+  </head>
+  <body>
+    <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+          <img src="../../Public/Images/logo.png" alt="">
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+          <button class="btn btn-outline-primary me-2" type="button">Logout</button>       
+         </div>
+      </nav>
+      <div class="container">
+          <div class="container mt-4">
+              <table class="table table-striped">
+                  <thead>
+                      <tr>
+                          <th>Event Name</th>
+                          <th>Event Date</th>
+                          <th>Category</th>
+                          <th>Location</th>
+                          <th>Description</th>
+                          <th>Image</th>
+                          <th>Last Registration Date</th>
+                          <th>Action</th>
+                      </tr>
+                  </thead>
+                  <tbody id="eventTableBody">
+                  </tbody>
+              </table>
+              <button class="btn btn-outline-success me-2" type="button">Create New Event</button>
+              
+              <div class="container modal-container">
+                  <form id="createEventForm" method="post">
+                      <label for="eventName">Event Name:</label>
+                      <input type="text" name="E_name" id="eventName" required><br>
+  
+                      <label for="eventDate">Event Date:</label>
+                      <input type="date" name="E_date" id="eventDate"><br>
+  
+                      <label for="eventCategory">Category:</label>
+                      <input type="text" name="Category" id="eventCategory"><br>
+  
+                      <label for="eventLocation">Location:</label>
+                      <input type="text" name="Location" id="eventLocation"><br>
+  
+                      <label for="eventDescription">Description:</label>
+                      <textarea name="Description" id="eventDescription"></textarea><br>
+  
+                      <label for="eventImage">Image URL:</label>
+                      <input type="text" name="Img" id="eventImage"><br>
+  
+                      <button type="submit">Create Event</button>
+                      <button type="button" id="cancelButton">Cancel</button>
+                  </form>
+                  
+              </div>
+          </div>
+      </div>
+      <script src="admin.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+  </html>

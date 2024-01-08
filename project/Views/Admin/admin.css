@@ -1,0 +1,17 @@
+.modal-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    display: none;
+    z-index: 9999;
+    background-color: white;
+    padding: 20px;
+}
+nav{
+    display: flex;
+    background-color: blue;
+    justify-content: space-between;
+}
+nav img{
+   width: 50px;
+}
