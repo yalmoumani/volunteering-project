@@ -11,120 +11,79 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="../nav.css">
   <link rel="stylesheet" href="signup.css">
+
+
+
 </head>
 
 <body>
   <nav>
     <div class="logo">
-      <a href="/Views/main.html">
-          <img width="80px" height="auto" style="z-index: 999;" src="../../Public/Images/logo.png"></a>
+        <a href="/Views/main.html">
+            <img width="80px" height="auto" style="z-index: 999;" src="../../Public/Images/logo.png">
+            
+        </a>
     </div>
-<div>
-    <ul id="menu">
-<li><a href="/Views/Events/events.html">Our Events</a></li>
-  <li><a href="#about">About Us</a></li>
-<li><a href="#contact">Contact</a></li>
-    </ul>
+    <div>
+        <ul id="menu">
+            <li><a href="/Views/Events/events.html">Our Events</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+    <div>
+        <ul>
+            <li><a href="/Views/Signup/signup.html" id="links">Sign Up</a></li>
+            <li><a href="/Views/Login/login.html" id="links">Login</a></li>
+        </ul>
+    </div>
+  </nav>
+  <div class="adjust">
+  <div id="signup-form">
+  <form id="myForm" action="" method="POST" enctype="multipart/form-data">
+      <div class="page active" id="page1">
+        <div class="top">       
+           <h2>Create An Account</h2>
+          <p>Already Have an Account? <a href="/Views/Login/login.html" id="login">Login</a></p>
   </div>
-  <div>
-    <ul>
-      <li><a href="/Views/Signup/signup.html" id="links">Sign Up</a></li>
-      <li><a href="/Views/Login/login.html" id="links">Login</a></li>
-    </ul>
-    </div>
-</nav>
-  <div class="content-boday">
-    <div id="login-container" class="container">
-      
-      <form id="userForm" method="post">
+        <input type="text" id="name" name="name" placeholder="Name" autocomplete="name">
 
+        <input type="email" id="email" name="email" placeholder="Email" autocomplete="email">
+        <small id="emailValidation"></small>
 
-        <h1>Sign Up</h1>
+        <input type="password" id="password" name="password" placeholder="Password" autocomplete="new-password">
+        <small id="passwordValidation"></small>
 
-        <div class="input-container">
-          <label for="img">Profile Image URL:</label>
-          <input type="file" id="img" name="img">
+        <input type="password" id="confirm" name="confirm" 
+        placeholder="Confirm" autocomplete="confirm">
+        <small id="confirmValidation"></small>
+
+        <button id="nextButton" onclick="nextPage()">Next</button>
+      </div>
+
+      <div class="page" id="page2">
+        <div class="top">
+          <h2>Your Profile Details</h2>
         </div>
-          
-          <div class="input-container">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-            <div class="user-check"></div>
-          </div>
+        <label for="file">Profile Picture</label>
+        <input type="file" id="img" name="img" placeholder="Profile Image File" autocomplete="file">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" placeholder="Username" autocomplete="username">
+        <small id="usernameValidation"></small><br>
 
-          <div class="input-container">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-            <div class="email-check"></div>
-          </div>
+        <label for="date_of_birth">Date of Birth</label>
+        <input type="date" id="date_of_birth" name="date_of_birth" autocomplete="bday">
+        <small id="dobValidation"></small>
     
-        <div class="input-container">
-          <label for="name">Name:</label>
-          <input type="text" id="name" name="name">
-          <div class="namecheck"></div>
+        <div class="buttons">
+          <div><button id="previousButton" onclick="previousPage()">Previous</button></div>
+          <div><button id="submitButton" onclick="return validateForm()">Submit</button></div>
         </div>
-
-       
-
-        <div class="input-container">
-          <label for="password">Password:</label>
-          <input type="password" id="password" name="password" required>
-          <div class="pass-check"></div>
-        </div>
-        <div class="input-container">
-          <label for="password">Confirm Password:</label>
-          <input type="password" id="password" name="password" required>
-          <div class="pass-check"></div>
-        </div>
-
-       
-
-        <div class="input-container">
-          <label for="date_of_birth">Date of Birth:</label>
-          <input type="date" id="date_of_birth" name="date_of_birth" required>
-          <div class="dob-check"></div>
-        </div>
-
-
-
-
-        <button class="signup-button" type="button" id="login-button" onclick="createUser()">Sign Up</button>
-        <p>Already have an account? <a href="login.html" class="login-link">Log In</a></p>
-      </form>
+      </div>
     </div>
   </div>
-  <script src="signup.js"></script>
-  <!-- <script>
-    function createUser() {
-        var formData = {
-            username: document.getElementById("username").value,
-            password: document.getElementById("password").value,
-            email: document.getElementById("email").value,
-            date_of_birth: document.getElementById("date_of_birth").value,
-            img: document.getElementById("img").value,
-            name: document.getElementById("name").value
-       
-        };
-
-        // Make a POST request using the Fetch API
-        
-        fetch('http://localhost/singup/project/admin/creat-us.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData)
-        })
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById("message").textContent = data.message || data.error;
-            console.log(JSON.stringify(data));
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    }
-</script> -->
+</div>
+    <script src="signup.js"></script>
 </body>
 
 </html>

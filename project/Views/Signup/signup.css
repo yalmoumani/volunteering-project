@@ -1,104 +1,154 @@
 
-    /* styles.css */
-    body {
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      background-color: #908686;
-  }
-  * {
+* {
     text-decoration: none;
     font-family: "poppins";
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
-  
-  .container {
-    margin-top: 150px;
-      background-color: #fff;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      text-align: center;
-      justify-content: center;
-  }
-  .content-boday{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-  }
-  #login-container{
-      display: flex;   
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: 100vh;
   }
   
-  h1 {
-      color: #333;
+  body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url(../../Public/Images/volunteers.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(5px);
+    z-index: -1;
+  }
+.adjust{
+  margin-top: 2.4rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+form{
+    display: flex;
+    flex-direction: column;
+}
+#login{
+    text-decoration: none;
+    color:#3be0e9;;
+}
+  
+#login:hover{
+    text-decoration: none;
+    color: rgb(37, 104, 39);
+}
+  
+  h2 {
+      color: #e99f15;
       font-size: 24px;
-      margin: 0 0 20px;
   }
-  
-  .input-container {
-      text-align: left;
-      margin: 10px 0;
+  .top{
+    margin: 0 0 5px;
   }
-  
-  label {
-      display: block;
-      color: #555;
-      font-size: 14px;
-      margin-bottom: 5px;
-  }
-      input {
+       input {
           width: 358px;
-          padding: 10px;
+          padding: 15px;
+          margin-bottom: 5px;
           border: 1px solid #ccc;
           border-radius: 5px;
           font-size: 14px;
+          color: rgba(66, 65, 65, 0.796);
       }
   
-  .signup-button {
-      border: none;
-      padding: 10px 20px;
-      border-radius: 25px;
-      background: white;
-      border: 1px solid black;
-      cursor: pointer;
-      font-size: 16px;
-      transition: all .8s;
-  
-  }
-  
-  .signup-button:hover {
-      background: black;
-      border: 2px groove white;
-      color: white;}
-  
-  .login-link {
-      color: #007bff;
-      text-decoration: none;
-  }
-  
-  .login-link:hover {
-      text-decoration: underline;
-  }
-  .namecheck,.user-check,.pass-check,.email-check, .dob-check{
-      color: red;
-      font-size: x-small;
-      font-weight: 100;
-  }
-  #userForm{
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      height: 700px;
-  }
-  @media only screen and (max-width: 425px) {
-      input{
-          width: 100%;
+    .page {
+        display: none;
+        display: flex;
+        flex-direction: column;
       }
-    }
+      
+      .page.show {
+        display: block;
+      }
+      #signup-form {
+        width: 400px;
+        height: 400px;
+        padding: 20px;
+        background-color: #fafafa;
+        border-radius: 5px;
+       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+
+      }
+  
+      .page {
+        display: none;
+      }
+  
+      .page.active {
+        display: block;
+      }
+      
+  
+      #nextButton {
+        width: 100%;
+        padding: 10px;
+        background-color:#deb214;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 10px;
+
+
+      }
+      #nextButton:hover {
+        background-color: #a38312;
+      }
+      .buttons{
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+      }
+  
+   #previousButton{
+    width:100px;
+    padding: 10px;
+    background-color: #deb214;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    
+   }
+   #previousButton:hover{
+    background-color: #a38312;
+   }
+   #submitButton{
+    width:200px;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    
+   }
+   #submitButton:hover{
+    background-color: #4CAF50;
+   }
+ 
+      #usernameValidation,
+      #emailValidation,
+      #dobValidation,
+      #passwordValidation {
+        color: red;
+        margin-bottom: 10px;
+      }

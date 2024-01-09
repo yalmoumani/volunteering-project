@@ -1,3 +1,70 @@
 body{
-    background: black;
+    background: rgb(156, 156, 156);
+    margin: 0px;
+}
+main{
+    display: flex;
+    width: 100%;
+}
+.left-side{
+background-color: aqua;
+display: flex;
+flex-direction: column;
+width: 20%;
+}
+.right-side{
+background-color: rgb(247, 247, 248);
+display: flex;
+flex-direction: column;
+width: 80%;
+}
+/* Adjust the card layout */
+.cards {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card {
+    display: flex;
+    align-items: center;
+    width: auto;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(1, 1, 1, 0.4);
+}
+
+.card img {
+    margin-right: 10px;
+    width: 30%;
+    height: 100%;
+    border-radius: 5px;
+}
+.details {
+    flex-grow: 1;
+}
+
+/* Styling for the title */
+.title {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Styling for location and date */
+.location-date {
+   display: flex;
+   gap: 14px;
+}
+/* Styling for the button */
+.button {
+    text-align: right;
+}
+
+.button a {
+    background-color: #007bff;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
 }
