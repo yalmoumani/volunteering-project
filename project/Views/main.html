@@ -14,26 +14,26 @@
 </head>
 <body>
   <div class="intro">
-  <nav>
-    <div class="logo">
-        <a href="/Views/main.html">
-            <img width="80px" height="auto" style="z-index: 999;" src="../../Public/Images/logo.png">
-            
-        </a>
-    </div>
-    <div>
-        <ul id="menu">
-            <li><a href="/Views/Events/events.html">Our Events</a></li>
-            <li><a href="#about">About Us</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </div>
-    <div>
-        <ul>
-            <li><a href="/Views/Signup/signup.html" id="links">Sign Up</a></li>
-            <li><a href="/Views/Login/login.html" id="links">Login</a></li>
-        </ul>
-    </div>
+   <nav>
+  <div class="logo">
+    <a href="/Views/main.html">
+      <img width="80px" height="auto" style="z-index: 999;" src="../../Public/Images/logo.png">
+    </a>
+  </div>
+  <div>
+    <ul id="menu">
+      <li><a href="/Views/Events/events.html">Our Events</a></li>
+      <li><a href="#about">About Us</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+  <div>
+    <ul>
+      <li id="signup-li" style="display: show;"><a href="/Views/Signup/signup.html" id="signup-link">Sign Up</a></li>
+      <li id="login-li" style="display: show;"><a href="/Views/Login/login.html" id="login-link">Login</a></li>
+      <li id="logout-li" style="display: none;"><a href="#" id="logout-link">Logout</a></li>
+    </ul>
+  </div>
 </nav>
 <div class="text">
   <div><p id="header">Discover Your Path <br>in Making a Difference</p></div>
@@ -42,7 +42,6 @@
 </div>
 
 </div>
-
 <div class="banner">
     <div class="portion">
         <div class="icon">
@@ -133,6 +132,6 @@
             </div>
         </div>
 </main>
-
+<script src="nav.js"></script>
 </body>
 </html>

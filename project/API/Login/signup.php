@@ -16,7 +16,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $data["password"];
     $date_of_birth = $data["date_of_birth"];
     $img = $data["img"];
-     
+
+    // Check if the email already exists in the database
+    $check_email_query = "SELECT * FROM users WHERE email = ?";
+    $stmt_check_email = $con->prepare($check_email_query);
+    $stmt_check_email->bind_param("s", $email);
+    $stmt_check_email->execute();
+    $result_email = $stmt_check_email->get_result();
+
+    if ($result_email->num_rows > 0) {
+      $response = array('error' => "Email already exists. Please choose a different email.");
+      echo json_encode($response);
+      exit;
+    }
+
+    // Check if the username already exists in the database
+    $check_username_query = "SELECT * FROM users WHERE username = ?";
+    $stmt_check_username = $con->prepare($check_username_query);
+    $stmt_check_username->bind_param("s", $username);
+    $stmt_check_username->execute();
+    $result_username = $stmt_check_username->get_result();
+
+    if ($result_username->num_rows > 0) {
+      $response = array('error' => "Username already exists. Please choose a different username.");
+      echo json_encode($response);
+      exit;
+    }
+
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
     // Save the image file
     $imageDir = "../../public/images/";

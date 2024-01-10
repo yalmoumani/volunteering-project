@@ -11,45 +11,63 @@
 
 </style>
 <body>
-  <nav>
-    <div class="logo">
-        <a href="/Views/main.html">
+    <nav>
+        <div class="logo">
+          <a href="/Views/main.html">
             <img width="80px" height="auto" style="z-index: 999;" src="../../Public/Images/logo.png">
-            
-        </a>
-    </div>
-    <div>
-        <ul id="menu">
+          </a>
+        </div>
+        <div>
+          <ul id="menu">
             <li><a href="/Views/Events/events.html">Our Events</a></li>
             <li><a href="#about">About Us</a></li>
             <li><a href="#contact">Contact</a></li>
-        </ul>
-    </div>
-    <div>
-        <ul>
-            <li><a href="/Views/Signup/signup.html" id="links">Sign Up</a></li>
-            <li><a href="/Views/Login/login.html" id="links">Login</a></li>
-        </ul>
-    </div>
-</nav>
+          </ul>
+        </div>
+        <div>
+          <ul>
+            <li id="signup-li" style="display: show;"><a href="/Views/Signup/signup.html" id="signup-link">Sign Up</a></li>
+            <li id="login-li" style="display: show;"><a href="/Views/Login/login.html" id="login-link">Login</a></li>
+            <li id="logout-li" style="display: none;"><a href="#" id="logout-link">Logout</a></li>
+          </ul>
+        </div>
+      </nav>
 <div>
     
 </div>
+<div class="intro">
+   
+    <hr>
+    <h1>Find Our Latest Events</h1>
+    <hr>
+</div>
 <main>
     <div class="left-side">
-
-    <label for="">Want Something Specific?</label>
-    <input type="search" name="" id="">
-
-
-    <label for="">Search by Dates:</label>
-    <label for="">Search by Dates:</label>
-    <label for="">Search by Dates:</label>
-
+        <div class="queries">
+          <label for="specific-search">Want Something Specific?</label>
+          <input type="search" id="specific-search" placeholder="Search by keyword">
+      
+          <label for="order-by">Order By:</label>
+          <select id="order-by">
+            <option value="select" selected>Select</option>
+            <option value="date">Date close - far</option>
+            <option value="date">Date far-close</option>
+            <option value="location">Location a-z</option>
+            <option value="location">Location z-a</option>
+            <option value="category">Category a-z</option>
+            <option value="category">Category z-a</option>
+          </select>
+      
+          <label for="start-date">Search by Specific Date:</label>
+          <input type="date" id="start-date">
+      
+          <button id="search-btn">Search</button>
+        </div>
+      </div>
     </div>
-    <div class="right-side">
-        <div class="cards">
-            <div class="card">
+    <div class="right-side" id="pagination-container">
+        <div class="cards" id="events-container">
+            <!-- <div class="card">
                 <img src="/Public/Images/food.jpg" alt="" width="100px">
                 <div class="details">
                     <div class="title">
@@ -60,10 +78,13 @@
                     </div>
                     <div class="location-date">
                         <div class="location">
-                            <p><i class="fa-solid fa-location-dot" style="color: #4c4c4d;"></i>Amman</p>
+                            <p><i class="fa-solid fa-location-dot" style="color: #4c4c4d;"></i> Amman</p>
                         </div>
                         <div class="date">
                             <p><i class="fa-regular fa-calendar-days" style="color: #4c4c4d;"></i> Date</p>
+                        </div>
+                        <div class="time">
+                            <p><i class="fa-regular fa-clock" style="color: #000000;"></i> Time</p>
                         </div>
                     </div>
                     <div class="description">
@@ -73,37 +94,13 @@
                         <a href="#">View Event</a>
                     </div>
                 </div>
-            </div>
-            <div class="card">
-                <img src="/Public/Images/food.jpg" alt="" width="100px">
-                <div class="details">
-                    <div class="title">
-                        <h3>Food Drive</h3>
-                    </div>
-                    <div class="category">
-                        <h4>Category</h4>
-                    </div>
-                    <div class="location-date">
-                        <div class="location">
-                            <p><i class="fa-solid fa-location-dot" style="color: #4c4c4d;"></i>Amman</p>
-                        </div>
-                        <div class="date">
-                            <p><i class="fa-regular fa-calendar-days" style="color: #4c4c4d;"></i> Date</p>
-                        </div>
-                    </div>
-                    <div class="description">
-                        <p>The food drive will work to help others</p>
-                    </div>
-                    <div class="button">
-                        <a href="#">View Event</a>
-                    </div>
-                </div>
-            </div>
+            </div> -->
         </div>
 </div>
 </main>
       
-    
+    <script src="/Views/nav.js"></script>
+    <script src="/Views/Events/events.js"></script>
 </body>
 </html>
   

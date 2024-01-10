@@ -7,31 +7,27 @@
 </head>
 
 <body>
-<nav id="navbar" class="">
-        <div class="nav-wrapper">
-          <!-- Navbar Logo -->
-          <div class="logo">
-            <!-- Logo Placeholder for Illustration -->
-            <a href="#home"><img width="80px" height="auto" style="z-index: 999;" src="603fa7500ceaef1becbea552e605a235-removebg-preview-removebg-preview.png"></a>
-         
-          </div>
-
-          <!-- Navbar Links -->
-          <ul id="menu">
-            <li><a href="#home">Home</a></li><!--
-         --><li><a href="#services">Services</a></li><!--
-         --><li><a href="#about">About</a></li><!--
-         --><li><a href="#contact">Contact</a></li>
-         <span>
-            <li><a href="login.html" id="links">Login</a></li>
-            <li><a href="aa.html" id="logout-button">Logout</a></li>
-         </span>
-          </ul>
-
-        </div>
-
-      </nav>
-
+<nav>
+  <div class="logo">
+    <a href="/Views/main.html">
+      <img width="80px" height="auto" style="z-index: 999;" src="../../Public/Images/logo.png">
+    </a>
+  </div>
+  <div>
+    <ul id="menu">
+      <li><a href="/Views/Events/events.html">Our Events</a></li>
+      <li><a href="#about">About Us</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+  <div>
+    <ul>
+      <li id="signup-li" style="display: show;"><a href="/Views/Signup/signup.html" id="signup-link">Sign Up</a></li>
+      <li id="login-li" style="display: show;"><a href="/Views/Login/login.html" id="login-link">Login</a></li>
+      <li id="logout-li" style="display: none;"><a href="#" id="logout-link">Logout</a></li>
+    </ul>
+  </div>
+</nav>
 
       <!-- Menu Icon -->
       <div class="menuIcon">
@@ -50,26 +46,7 @@
       </div>
 
    <!-- this section edits name and image -->
-    <?php
-       include "connection.php";
-    // session_start();
-    // if (!isset($_SESSION['userId'])) {
-    //     header("Location: login.php");
-    //     exit;
-    // }
-    // $userId = $_SESSION['userId']; //replace with actual formatting
-    $userId = '5'; //delete after making comment visible
-    $sql = "SELECT * FROM users WHERE id = '$userId'";
-    $result = mysqli_query($con, $sql);
-    $row = mysqli_fetch_assoc($result);
-    // print_r($row);
-    $email = $row["email"];
-    $birthday = $row["date_of_birth"];
-    $name = $row['username'];
-    $image = $row['img'];
-
-    mysqli_close($con);
-    ?>
+    
 
     <div class="left">
         <div class="heading">

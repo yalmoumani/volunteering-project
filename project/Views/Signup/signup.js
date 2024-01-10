@@ -30,47 +30,47 @@ function previousPage(event) {
 function submitForm(event) {
   event.preventDefault(); // Prevent the default form submission behavior
 
-  const isValid = validateForm();
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const dateOfBirth = document.getElementById('date_of_birth').value;
+  const password = document.getElementById('password').value;
+  const img = document.getElementById('img').value;
+  const username = document.getElementById('username').value;
 
-  if (isValid) {
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const dateOfBirth = document.getElementById('date_of_birth').value;
-    const password = document.getElementById('password').value;
-    const img = document.getElementById('img').value;
-    const username = document.getElementById('username').value;
+  const user = {
+    name: name,
+    email: email,
+    date_of_birth: dateOfBirth,
+    password: password,
+    img: img,
+    username: username
+  };
 
-    const user = {
-      name: name,
-      email: email,
-      date_of_birth: dateOfBirth,
-      password: password,
-      img: img,
-      username: username
-    };
-
-    fetch('http://localhost/yasmeen/volunteering-project/project/API/Login/signup.php', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(user)
+  fetch('http://localhost/yasmeen/volunteering-project/project/API/Login/signup.php', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(user)
+  })
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error('Network response was not ok.');
+      }
     })
-      .then(response => {
-        // Handle the response from the server, if needed
-        if (response.ok) {
-          window.location.href = "/Views/Login/login.html"; // Redirect upon successful submission
-        } else {
-          // Handle error scenarios
-          throw new Error('Network response was not ok.');
-        }
-      })
-      .catch(error => {
-        // Handle and display errors
-        console.error('There was a problem with the fetch operation:', error);
-        // You can display an error message on the page if needed
-      });
-  }
+    .then(data => {
+      if (data.success) {
+        window.location.href = "/Views/Login/login.html"; // Redirect upon successful submission
+      } else {
+        const emailValidation = document.getElementById('emailValidation');
+        emailValidation.innerHTML = "Email already exists. Please choose a different email.";
+      }
+    })
+    .catch(error => {
+      console.error('There was a problem with the fetch operation:', error);
+    });
 }
 
 showPage(currentPage);
@@ -121,8 +121,6 @@ function validateForm() {
   if (username.trim() === "") {
     usernameValidation.innerHTML = "Please enter your name.";
     isValid = false;
-  } else {
-    usernameValidation.innerHTML = ""; // Clear error message when the input is corrected
   }
 
   // Validate email
@@ -135,8 +133,6 @@ function validateForm() {
     if (!emailRegex.test(email)) {
       emailValidation.innerHTML = "Please enter a valid email address.";
       isValid = false;
-    } else {
-      emailValidation.innerHTML = ""; // Clear error message when the input is corrected
     }
   }
 
@@ -148,63 +144,48 @@ function validateForm() {
     // Validate minimum age of 18
     var today = new Date();
     var dobDate = new Date(dob);
-    var ageDiff = today - dobDate;
-    var age =Math.floor(ageDiff / (1000 * 60 * 60 * 24 * 365.25));
+    var ageDiff =new Date() - new Date(dob);
+    var ageDate = new Date(ageDiff);
+    var age = Math.abs(ageDate.getUTCFullYear() - 1970);
     if (age < 18) {
       dobValidation.innerHTML = "You must be at least 18 years old.";
       isValid = false;
-    } else {
-      dobValidation.innerHTML = ""; // Clear error message when the input is corrected
     }
   }
-
-  // Validate password
-  if (password.trim() === "") {
-    passwordValidation.innerHTML = "Please enter a password.";
+// Validate password
+if (password.trim() === "") {
+  passwordValidation.innerHTML = "Please enter a password.";
+  isValid = false;
+} else {
+  // Validate password length
+  if (password.length < 6 || password.length > 12) {
+    passwordValidation.innerHTML = "Password must be between 6 and 12 characters long.";
     isValid = false;
-  } else {
-    // Validate password length and complexity
-    var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{6,12}$/;
-    if (!passwordRegex.test(password)) {
-      passwordValidation.innerHTML = "Password must be 6-12 characters long and contain at least one lowercase letter, one uppercase letter, one digit, and one special character.";
-      isValid = false;
-    } else {
-      passwordValidation.innerHTML = ""; // Clear error message when the input is corrected
-    }
   }
-
-  // Validate password confirmation
-  if (confirm.trim() === "") {
-    confirmValidation.innerHTML = "Please confirm your password.";
+  // Validate password complexity
+  else if (
+    !/[A-Z]/.test(password) || // At least one uppercase letter
+    !/[a-z]/.test(password) || // At least one lowercase letter
+    !/\d/.test(password) ||    // At least one digit
+    !/[!@#$%^&*]/.test(password) // At least one special character
+  ) {
+    passwordValidation.innerHTML =
+      "Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character.";
     isValid = false;
-  } else {
-    // Validate password match
-    if (password !== confirm) {
-      confirmValidation.innerHTML = "Passwords do not match.";
-      isValid = false;
-    } else {
-      confirmValidation.innerHTML = ""; // Clear error message when the input is corrected
-    }
   }
+}
 
-  // Disable submit button if form is invalid
-  const submitButton = document.getElementById('submitButton');
-  submitButton.disabled = !isValid;
+// Validate password confirmation
+if (confirm.trim() === "") {
+  confirmValidation.innerHTML = "Please confirm your password.";
+  isValid = false;
+} else {
+  // Validate password match
+  if (password !== confirm) {
+    confirmValidation.innerHTML = "Passwords do not match.";
+    isValid = false;
+  }
+}
 
   return isValid;
 }
-
-// Function to check for changes or corrections in the input fields
-function checkChanges() {
-  const form = document.getElementById('myForm');
-  const inputs = form.getElementsByTagName('input');
-
-  for (let i = 0; i < inputs.length; i++) {
-    inputs[i].addEventListener('input', function() {
-      validateForm();
-    });
-  }
-}
-
-// Run the checkChanges function
-checkChanges();

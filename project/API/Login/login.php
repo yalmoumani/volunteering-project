@@ -1,49 +1,60 @@
 <?php
 session_start(); 
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Allow-Headers: Content-Type");
+header("Content-Type: application/json");
 
-include "conn.php";
+include "../connection.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $data = json_decode(file_get_contents('php://input'), true);
 
-  if ($data && isset($data["username"]) && isset($data["password"])) {
-    $username = $data["username"];
+  if ($data && isset($data["email"]) && isset($data["password"])) {
+    $email = $data["email"];
     $password = $data["password"];
 
-    $query = "SELECT * FROM users WHERE username = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("s", $username);
+    if (empty($email) || empty($password)) {
+      $response = array('success' => false, 'error' => 'Email and password cannot be empty');
+      header("Content-Type: application/json");
+      echo json_encode($response);
+      exit;
+    }
+
+    $query = "SELECT username, Id, Role, password FROM users WHERE email = ?";
+    $stmt = $con->prepare($query);
+    $stmt->bind_param("s", $email);
     $stmt->execute();
-    $result = $stmt->get_result();
+    $stmt->bind_result($username, $Id, $Role, $stored_password);
+    $result = $stmt->fetch();
 
-    if ($result->num_rows > 0) {
-      $user = $result->fetch_assoc();
-      $stored_password = $user["password"];
-
-      if ($password === $stored_password) {
-
+    if ($result) {
+      if (password_verify($password, $stored_password)) {
         $_SESSION['username'] = $username;
-        $_SESSION['user_id'] = $user['Id'];
+        $_SESSION['user_id'] = $Id;
+        $_SESSION['role'] = $Role;
 
-        echo "You are logged in";
+        $response = array('success' => true, 'username' => $username, 'role' => $Role, 'user_id' => $Id);
+        header("Content-Type: application/json");
+        echo json_encode($response);
       } else {
-        $response = array('error' => 'Invalid password');
+        $response = array('success' => false, 'error' => 'Invalid password');
         header("Content-Type: application/json");
         echo json_encode($response);
       }
     } else {
-      $response = array('error' => 'Invalid username');
+      $response = array('success' => false, 'error' => 'Invalid email');
       header("Content-Type: application/json");
       echo json_encode($response);
     }
 
     $stmt->close();
   } else {
-    $response = array('error' => 'Invalid JSON data');
+    $response = array('success' => false, 'error' => 'Invalid JSON data');
     header("Content-Type: application/json");
     echo json_encode($response);
   }
 }
 
-$conn->close();
+$con->close();
 ?>
